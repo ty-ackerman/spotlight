@@ -18,6 +18,7 @@ router.post('/', async (req, res, next) => {
 		const doc = await user.save();
 		res.status(200).send({ data: [ doc ] });
 	} catch (error) {
+		res.status(500).send({ data: error });
 		next(error);
 	}
 });
