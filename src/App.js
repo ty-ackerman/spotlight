@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Signup from './components/Signup';
+import Welcome from './components/Welcome';
 import { getToken } from './services/tokenService';
 import Axios from 'axios';
 
@@ -33,7 +34,6 @@ class App extends Component {
 					}
 				});
 				const user = res.data;
-				console.log(user);
 				this.setState({ user });
 			} catch (error) {
 				console.log(error);
@@ -51,7 +51,7 @@ class App extends Component {
 							<Route
 								exact
 								path="/"
-								render={() => (user ? <Dashboard setUser={this.setUser} /> : <Redirect to="/login" />)}
+								render={() => (user ? <Dashboard user={user} setUser={this.setUser} /> : <Welcome />)}
 							/>
 							<Route
 								path="/login"
@@ -61,7 +61,11 @@ class App extends Component {
 							<Route
 								path="/signup"
 								render={() =>
-									user ? <Dashboard setUser={this.setUser} /> : <Signup setUser={this.setUser} />}
+									user ? (
+										<Redirect to="/" />
+									) : (
+										<Signup setUser={this.setUser} getCurrentUser={this.getCurrentUser} />
+									)}
 							/>
 						</Switch>
 					</div>

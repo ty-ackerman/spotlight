@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { setToken } from '../services/tokenService';
 
 export class Signup extends Component {
 	state = {
@@ -20,7 +21,12 @@ export class Signup extends Component {
 		// POST route for signup info into backend
 		try {
 			const res = await axios.post('/signup', { email, password });
-			this.props.setUser(res.data.data['0']);
+			// this.props.setUser(res.data.data['0']);
+			const token = await axios.post('/login', { email, password });
+			// this gives us a token
+			console.log(token.data.data['0']);
+			setToken(token.data.data['0']);
+			this.props.getCurrentUser();
 		} catch (error) {
 			console.log(error);
 		}

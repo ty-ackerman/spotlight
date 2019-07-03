@@ -1,0 +1,28 @@
+To Do:
+
+Add seeds/clearing db
+adding personal info
+
+
+
+
+
+Error handling for login
+
+
+What will the user object contain?
+
+1) Profile
+    -name
+    -hobby/role/position/title
+    -bio/ sub-bio
+    -birthday
+    
+
+2) Posts
+    -videos
+    -pictures
+    -url shares
+    -events
+
+
